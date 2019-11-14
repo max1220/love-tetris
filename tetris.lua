@@ -205,6 +205,7 @@ local function new_tetris()
 		if self.gameover then return end
 		if self:check_block_at(self.block_x-1, self.block_y, self.block_r) then
 			self.block_x = self.block_x - 1
+			return true
 		end
 	end
 
@@ -213,6 +214,7 @@ local function new_tetris()
 		if self.gameover then return end
 		if self:check_block_at(self.block_x+1, self.block_y, self.block_r) then
 			self.block_x = self.block_x + 1
+			return true
 		end
 	end
 
@@ -222,6 +224,7 @@ local function new_tetris()
 		local nr = (self.block_r - 1) % 4
 		if self:check_block_at(self.block_x, self.block_y, nr) then
 			self.block_r = nr
+			return true
 		end
 	end
 
@@ -231,6 +234,7 @@ local function new_tetris()
 		local nr = (self.block_r + 1) % 4
 		if self:check_block_at(self.block_x, self.block_y, nr) then
 			self.block_r = nr
+			return true
 		end
 	end
 
@@ -239,6 +243,7 @@ local function new_tetris()
 		if self.gameover then return end
 		if self:check_block_at(self.block_x, self.block_y+1, self.block_r) then
 			self.block_y = self.block_y + 1
+			return true
 		else
 			if self.on_block_set then
 				self:on_block_set(self.block_x, self.block_y, self.block_id)
@@ -246,7 +251,6 @@ local function new_tetris()
 			self:set_block_at(self.block_x, self.block_y, self.block_id, self.block_r)
 			self:check_complete_lines()
 			self:next_block()
-			return true
 		end
 		self.autodown_time = 0
 	end
@@ -254,7 +258,7 @@ local function new_tetris()
 	-- drop the current tile to the bottom
 	function tetris:drop()
 		if self.gameover then return end
-		while not tetris:down() do
+		while tetris:down() do
 		end
 	end
 
