@@ -80,15 +80,9 @@ Increment the internal timer by `dt`. This specifies the time units used, and is
 
 
 
-`game:left(), game:right(), game:drop(), game:rotate_left(), game:rotate_right()`
+`moved = game:left(), game:right(), game:drop(), game:rotate_left(), game:rotate_right(), game:down()`
 
-Perform the specified action on the current block.
-
-
-
-`touch = game:down()`
-
-Perform the down action on the current block. `touch` is set if the block collided.
+Perform the specified action on the current block. `moved` is set if the block was able to move.
 
 
 
